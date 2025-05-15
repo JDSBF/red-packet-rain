@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>晓商圈红包雨</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="headline">
+    <div>晓商圈发红包了</div>
+    <div>100元到账</div>
+  </div>
+
+  <canvas id="rain-canvas"></canvas>
+
+  <audio id="bg-sound" autoplay loop>
+    <source src="coin-rain.mp3" type="audio/mpeg" />
+    您的浏览器不支持音频播放。
+  </audio>
+
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const audio = document.getElementById('bg-sound');
+      const tryPlay = () => {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            document.body.addEventListener('click', () => {
+              audio.play();
+            }, { once: true });
+          });
+        }
+      };
+      tryPlay();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #fff7e0, #ffe7a0);
+  font-family: "微软雅黑", sans-serif;
+}
+
+.headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #d40000;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5;
+  z-index: 10;
+  pointer-events: none;
+  text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);
+}
