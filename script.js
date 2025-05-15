@@ -1,52 +1,39 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-let redPackets = [];
-let image = new Image();
-image.src = 'red_packet.png';
+const rainContainer = document.querySelector(".rain-container");
+const images = ["red_packet.png", "coin.png"];
 
-class RedPacket {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * -canvas.height;
-        this.speed = 2 + Math.random() * 3;
-        this.size = 30 + Math.random() * 30;
-    }
-    update() {
-        this.y += this.speed;
-        if (this.y > canvas.height) {
-            this.y = -this.size;
-            this.x = Math.random() * canvas.width;
-        }
-    }
-    draw() {
-        ctx.drawImage(image, this.x, this.y, this.size, this.size);
-    }
+// 创建掉落物
+function createDrop() {
+  const drop = document.createElement("img");
+  drop.src = images[Math.floor(Math.random() * images.length)];
+  drop.className = "drop";
+  drop.style.left = Math.random() * window.innerWidth + "px";
+  rainContainer.appendChild(drop);
+
+  setTimeout(() => {
+    drop.style.top = window.innerHeight + "px";
+  }, 10);
+
+  drop.addEventListener("click", () => {
+    document.getElementById("coin-audio").play();
+    drop.remove();
+  });
+
+  setTimeout(() => {
+    drop.remove();
+  }, 3500);
 }
 
-function createPackets(num) {
-    for (let i = 0; i < num; i++) {
-        redPackets.push(new RedPacket());
-    }
-}
+// 每200ms落下一个
+setInterval(createDrop, 200);
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    redPackets.forEach(p => {
-        p.update();
-        p.draw();
-    });
-    requestAnimationFrame(animate);
-}
-
-image.onload = function () {
-    createPackets(30);
-    animate();
-};
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+// 用户首次点击解锁音频播放
+document.body.addEventListener("click", () => {
+  const audio = document.getElementById("coin-audio");
+  audio.play().then(() => {
+    audio.pause();
+    audio.currentTime = 0;
+  }).catch((e) => {
+    console.log("首次点击激活音频失败：", e);
+  });
+}, { once: true });
