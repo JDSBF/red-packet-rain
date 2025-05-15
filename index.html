@@ -37,5 +37,27 @@
       tryPlay();
     });
   </script>
+<audio id="bg-sound" autoplay loop>
+  <source src="coin-rain.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    const audio = document.getElementById('bg-sound');
+    const tryPlay = () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          const unlock = () => {
+            audio.play();
+            document.body.removeEventListener('click', unlock);
+          };
+          document.body.addEventListener('click', unlock);
+        });
+      }
+    };
+    tryPlay();
+  });
+</script>
 </body>
 </html>
