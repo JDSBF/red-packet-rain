@@ -44,3 +44,17 @@ body {
   z-index: 5;
   transition: top 3s linear;
 }
+.headline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: gold;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5;
+  z-index: 10;
+  pointer-events: none; /* 不挡住红包点击 */
+  font-family: "微软雅黑", sans-serif;
+}
