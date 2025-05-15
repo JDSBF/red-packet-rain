@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>晓商圈发红包了
-    100元到账</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <title>下红包雨啦！</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>晓商圈发红包了    100元到账</h1>
-        <canvas id="canvas"></canvas>
-    </div>
-    <script src="script.js"></script>
+    <h1>点击屏幕抢红包！</h1>
+    <div id="rain-container"></div>
+
+    <script>
+        const container = document.getElementById('rain-container');
+
+        function createRedPacket() {
+            const redPacket = document.createElement('img');
+            redPacket.src = '/static/red_packet.png';
+            redPacket.className = 'red-packet';
+            redPacket.style.left = Math.random() * 100 + 'vw';
+            redPacket.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+            redPacket.onclick = () => {
+                alert("恭喜你抢到一个红包！");
+                redPacket.remove();
+            }
+
+            container.appendChild(redPacket);
+
+            setTimeout(() => {
+                redPacket.remove();
+            }, 5000);
+        }
+
+        setInterval(createRedPacket, 300);
+    </script>
 </body>
 </html>
