@@ -7,24 +7,29 @@ body {
 
 .headline {
   position: absolute;
-  top: 50%;
+  top: 40px; /* 提高位置 */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   color: #d40000;
   font-size: 22px;
-  padding: 20px 30px;
   font-weight: bold;
   text-align: center;
-  line-height: 1.5;
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  padding: 20px 30px;
+  max-width: 90%;
+  pointer-events: auto;
+  white-space: nowrap; /* 防止“晓商圈发红包了”被自动换行 */
 }
-
+.title-line {
+  margin: 5px 0;
+  line-height: 1.5;
+}
 .red-packet-button {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 10px 24px;
   background-color: #ff4242;
   color: white;
@@ -35,4 +40,3 @@ body {
   pointer-events: auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
